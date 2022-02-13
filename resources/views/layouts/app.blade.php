@@ -42,5 +42,7 @@
         @stack('modals')
 
         @livewireScripts
+
+    <script src="{{ url(mix('js/tom-select.js')) }}"></script>
     </body>
 </html>

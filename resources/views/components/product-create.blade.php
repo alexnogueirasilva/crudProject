@@ -21,16 +21,12 @@
                                                    class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                                         </div>
                                         <div class="col-span-6 sm:col-span-3">
-                                            <label for="country"
-                                                   class="block text-sm font-medium text-gray-700">{{ __('tag') }}</label>
-                                            <selectc id="country" name="tag" autocomplete="tag" multiple="multiple"
-                                                     class=" form-multiselect mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                                <option selected disabled>{{ __('choose a tag') }}</option>
-                                                @foreach($tags as $tag)
-                                                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
-                                                @endforeach
-
-                                            </selectc>
+                                            <label for="country" class="block text-sm font-medium text-gray-700">{{ __('tag') }}</label>
+                                            <select id="select-state" name="tom-select" multiple class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                                                <option>United States</option>
+                                                <option>Canada</option>
+                                                <option>Mexico</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
