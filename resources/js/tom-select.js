@@ -1,3 +1,0 @@
-$(function(){
-    $('#tom-select').multiSelect();
-});

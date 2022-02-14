@@ -77,5 +77,11 @@
     "Log Out": "Deslogar",
     "Product name": "Nome do produto",
     "choose a tag": "Escolha uma tag",
-    "Product registrations": "Cadastro de produtos"
+    "Product registrations": "Cadastro de produtos",
+    "Product": "Produtos",
+    "Product controller": "Controle de produtos",
+    "Product list": "Lista de produtos",
+    "Create product": "Cadastra produtos",
+    "Tag list": "Lista de tags",
+    "Create tag": "Criar tag"
 }

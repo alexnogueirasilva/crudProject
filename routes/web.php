@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,5 +20,7 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::get('dashboard', [ProductController::class, 'desboard'])->name('dashboard');
     Route::resource('product', ProductController::class);
+    Route::resource('tag', TagController::class);
 });

@@ -17,8 +17,6 @@
 
 <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
-    <script src="{{ mix('css/demo-styles.css') }}" defer></script>
-    <script src="{{ mix('css/tom-select.css') }}" defer></script>
 </head>
 <body class="font-sans antialiased">
 <x-jet-banner/>
@@ -44,7 +42,6 @@
 @stack('modals')
 
 @livewireScripts
-<script src="{{ url(mix('js/tom-select.js')) }}"></script>
-<script src="{{ url(mix('js/jquery.multi-select.js')) }}"></script>
+
 </body>
 </html>

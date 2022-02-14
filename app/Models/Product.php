@@ -15,7 +15,8 @@ class Product extends Model
      * @var string[]
      */
     protected $fillable = [
-      'name'
+        'name',
+        'tag_id'
     ];
 
     /**
@@ -36,13 +37,8 @@ class Product extends Model
             ->join('products_tags', 'products.id', '=', 'products_tags.product_id')
             ->join('tags', 'products_tags.tag_id', '=', 'tags.id')
             ->select('products.*', 'products_tags.*', 'tags.name AS tag_name')
-            ->groupBy('tag_name')
             ->get();
 
     }
 
-    public function scopeTags($query)
-    {
-
-    }
 }

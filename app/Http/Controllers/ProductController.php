@@ -4,16 +4,26 @@ namespace App\Http\Controllers;
 
 
 use App\Models\Product;
+use App\Models\ProductsTags;
 use App\Models\Tag;
 use DB;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class ProductController extends Controller
 {
+
+
+    public function desboard()
+    {
+        $products = Product::products();
+
+        return view('dashboard', compact('products'));
+    }
 
     /**
      * Display a listing of the resource.
@@ -42,36 +52,51 @@ class ProductController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return Response
+     * @param Request $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $product = Product::where('name', $request->name)->get();
+
+        if ($product->count() > 0){
+            return redirect()->back()->with('error', 'Whoops já exite esse produto');
+        }
+
+        $createProduct = Product::create($request->all());
+        $createProduct->save();
+        $product_id = $createProduct->id;
+
+        $tags = new ProductsTags();
+        $tags->product_id = $product_id;
+        $tags->tag_id = $request['tom-select'];
+        $tags->save();
+
+         return redirect()->route('product.index');
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return Response
+     * @param $id
+     * @return Application|Factory|View
      */
     public function show($id)
     {
-        //
+       $product = Product::find($id);
+
+       return view('components.product-edit',);
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return Response
+     * @param $id
+     * @return Application|Factory|View
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+
+        return view('components.product-edit',[
+            'product' => $product
+        ]);
     }
 
     /**
