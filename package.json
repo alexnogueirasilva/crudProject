@@ -21,6 +21,7 @@
         "tailwindcss": "^3.0.0"
     },
     "dependencies": {
+        "jquery": "^3.6.0",
         "tom-select": "^2.0.0"
     }
 }

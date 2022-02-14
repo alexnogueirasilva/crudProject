@@ -1,5 +1,8 @@
 {
     "/js/app.js": "/js/app.js",
     "/js/tom-select.js": "/js/tom-select.js",
+    "/js/jquery.multi-select.js": "/js/jquery.multi-select.js",
+    "/css/demo-styles.css": "/css/demo-styles.css",
+    "/css/tom-select.css": "/css/tom-select.css",
     "/css/app.css": "/css/app.css"
 }

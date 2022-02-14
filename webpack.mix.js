@@ -18,7 +18,11 @@ mix.js('resources/js/app.js', 'public/js')
         require('tailwindcss'),
     ])
 
+    .postCss('resources/css/tom-select.css', 'public/css')
+    .postCss('resources/css/demo-styles.css', 'public/css')
+
     .js('resources/js/tom-select.js', 'public/js')
+    .js('resources/js/jquery.multi-select.js', 'public/js')
 
 if (mix.inProduction()) {
     mix.version();
