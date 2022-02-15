@@ -145,6 +145,6 @@ class ProductController extends Controller
 
 
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('info', "Produto {$productDelete->name} excluído com sucesso !");
     }
 }
