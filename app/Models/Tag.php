@@ -9,7 +9,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property mixed $product_id
+ * @method static where(string $string, $id)
+ * @method static findOrFail($id)
+ * @method static find($id)
+ * @method static create(array $all)
  */
+
 class Tag extends Model
 {
     use HasFactory;

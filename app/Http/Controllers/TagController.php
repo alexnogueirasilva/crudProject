@@ -50,9 +50,7 @@ class TagController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
+     * @param $id
      * @return void
      */
     public function show($id): void
@@ -95,17 +93,17 @@ class TagController extends Controller
        return redirect()->route('tag.index');
     }
 
-
-    public function destroy($id)
+    /**
+     * @param $id
+     * @return RedirectResponse
+     */
+    public function destroy($id): RedirectResponse
     {
-        $tagRelationship = Tag::tagRelationship();
 
-       if ( $tagRelationship->count() > 0){
-           return redirect()->back()->with('error', 'A tag não pode ser excluída pois está atrelada a um produto');
-       }
+       $tagDelete = Tag::findOrFail($id);
+       $tagDelete->product()->detach();
+       $tagDelete->delete();
 
-       Tag::findOrFail($id)->delete();
-
-       return redirect()->route('tag.index');
+       return redirect()->route('tag.index')->with('info', "A tag {$tagDelete->name} foi deletada");
     }
 }

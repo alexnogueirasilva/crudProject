@@ -25,7 +25,9 @@ class ProductController extends Controller
     {
         $products = Product::products();
 
-        return view('dashboard', compact('products'));
+        return view('dashboard', [
+            'products' => $products
+        ]);
     }
 
     /**
@@ -45,10 +47,24 @@ class ProductController extends Controller
     public function relationship()
     {
         $tags = Tag::all();
+        $products = Product::all();
 
         return view('components.product-relationship', [
-            "tags" => $tags
+            "tags" => $tags,
+            "products" => $products
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function createRelationship(Request $request): RedirectResponse
+    {
+        $createProduct = ProductsTags::create($request->all());
+        $createProduct->save();
+
+        return redirect()->route('dashboard');
     }
 
     /**
@@ -137,8 +153,12 @@ class ProductController extends Controller
      */
     public function destroy($id): RedirectResponse
     {
-        Product::findOrFail($id)->delete();
+       $productDelete = Product::findOrFail($id);
+       $productDelete->tags()->detach();
+       $productDelete->delete();
 
-        return redirect()->route('product.index');
+
+
+        return redirect()->route('product.index')->with('info', "Produto {$productDelete->name} excluído com sucesso !");
     }
 }
