@@ -26,4 +26,13 @@ class Tag extends Model
     {
         return $this->belongsToMany(Product::class, 'products_tags', 'product_id', 'tag_id');
     }
+
+    public function scopeTagRelationship($query)
+    {
+        return $query->with('product')
+            ->join('products_tags', 'tags.id', '=', 'products_tags.tag_id')
+            ->join('products', 'products_tags.product_id', '=', 'products.id')
+            ->select('tags.name', 'products.name AS product_name')
+            ->get();
+    }
 }
