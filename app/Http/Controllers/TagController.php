@@ -81,15 +81,16 @@ class TagController extends Controller
     public function update(Request $request, $id): RedirectResponse
     {
 
-        $tagUpdates = Tag::where('name', $request->name);
+        $tagUpdates = Tag::where('name', $request->name)->where('id', '!=', $id)->get();
+
 
         if ($tagUpdates->count() > 0 ){
-            return redirect()->back()->with('error', 'A tag já existe, não foi modificado');
+            return redirect()->back()->with('error', 'A tag já existe');
         }
 
-       $tagUpdate = Tag::where('id', $id)->first();
-       $tagUpdate->name = $request->name;
-       $tagUpdate->save();
+       $tagUpdates = Tag::where('id', $id)->first();
+       $tagUpdates->name = $request->name;
+       $tagUpdates->save();
 
        return redirect()->route('tag.index');
     }
