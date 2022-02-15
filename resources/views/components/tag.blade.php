@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('List Tag') }}
         </h2>
     </x-slot>
 
@@ -47,6 +47,7 @@
                                         </th>
                                     </tr>
                                     </thead>
+                                    @if($tags->count() > 0)
                                     <tbody class="bg-white divide-y divide-gray-200">
                                     @foreach($tags as $tag)
                                         <tr>
@@ -85,6 +86,9 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                    @else
+                                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">Nenhuma Tag Cadastrada...</td>
+                                    @endif
                                     <!-- More people... -->
                                     </tbody>
                                 </table>

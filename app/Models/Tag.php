@@ -20,7 +20,9 @@ class Tag extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'tag_id',
+        'product_id'
     ];
 
 
@@ -29,7 +31,7 @@ class Tag extends Model
      */
     public function product(): BelongsToMany
     {
-        return $this->belongsToMany(Product::class, 'products_tags', 'product_id', 'tag_id');
+        return $this->belongsToMany(Product::class, 'products_tags', 'tag_id', 'product_id');
     }
 
     public function scopeTagRelationship($query)
