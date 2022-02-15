@@ -47,10 +47,24 @@ class ProductController extends Controller
     public function relationship()
     {
         $tags = Tag::all();
+        $products = Product::all();
 
         return view('components.product-relationship', [
-            "tags" => $tags
+            "tags" => $tags,
+            "products" => $products
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function createRelationship(Request $request): RedirectResponse
+    {
+        $createProduct = ProductsTags::create($request->all());
+        $createProduct->save();
+
+        return redirect()->route('dashboard');
     }
 
     /**
