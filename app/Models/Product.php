@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @method static products()
+ * @method static paginate(int $int)
+ */
 class Product extends Model
 {
     use HasFactory;
@@ -31,7 +35,7 @@ class Product extends Model
      * @param $query
      * @return mixed
      */
-    public function scopeProducts($query)
+    public function scopeProducts($query): mixed
     {
         return $query->with('tags')
             ->join('products_tags', 'products.id', '=', 'products_tags.product_id')

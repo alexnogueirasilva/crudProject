@@ -50,6 +50,10 @@
                                     <x-jet-dropdown-link href="{{ route('product.create') }}">
                                         {{ __('Create product') }}
                                     </x-jet-dropdown-link>
+
+                                    <x-jet-dropdown-link href="{{ route('product.relationship') }}">
+                                        {{ __('Create relationship product and tag') }}
+                                    </x-jet-dropdown-link>
                                 </div>
                             </x-slot>
                         </x-jet-dropdown>

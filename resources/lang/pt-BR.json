@@ -85,5 +85,14 @@
     "Tag list": "Lista de tags",
     "Create tag": "Criar tag",
     "Name Tag": "Nome da tag",
-    "Tag registrations": "Registro de Tag"
+    "Tag registrations": "Registro de Tag",
+    "Name product": "Nome do produto",
+    "Description": "Descrição",
+    "Date create": "Data de cadastro",
+    "Showing": "Exibindo",
+    "to": "para",
+    "of": "de",
+    "results": "resultados",
+    "Actions": "Ações",
+    "Create relationship product and tag": "Criar relacionamento produtos/tag"
 }

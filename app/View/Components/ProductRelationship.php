@@ -2,11 +2,9 @@
 
 namespace App\View\Components;
 
-use Closure;
-use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class ProductEdit extends Component
+class ProductRelationship extends Component
 {
     /**
      * Create a new component instance.
@@ -21,10 +19,10 @@ class ProductEdit extends Component
     /**
      * Get the view / contents that represent the component.
      *
-     * @return View
+     * @return \Illuminate\Contracts\View\View|\Closure|string
      */
     public function render()
     {
-        return view('components.product-edit');
+        return view('components.product-relationship');
     }
 }

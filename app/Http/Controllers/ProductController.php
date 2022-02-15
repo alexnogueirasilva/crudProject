@@ -18,7 +18,10 @@ class ProductController extends Controller
 {
 
 
-    public function desboard()
+    /**
+     * @return Application|Factory|View
+     */
+    public function dashboard()
     {
         $products = Product::products();
 
@@ -32,9 +35,20 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::products();
+        $products = Product::paginate(6);
 
-        return view('dashboard', compact('products'));
+        return view('components.product', [
+            'products' => $products
+        ]);
+    }
+
+    public function relationship()
+    {
+        $tags = Tag::all();
+
+        return view('components.product-relationship', [
+            "tags" => $tags
+        ]);
     }
 
     /**
@@ -44,11 +58,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $tags = Tag::all();
 
-        return view('components.product-create', [
-            "tags" => $tags
-        ]);
+        return view('components.product-create');
     }
 
     /**
@@ -92,33 +103,42 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::find($id);
+        $productEdit = Product::find($id);
 
         return view('components.product-edit',[
-            'product' => $product
+            'productEdit' => $productEdit
         ]);
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return Response
+     * @param Request $request
+     * @param $id
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): RedirectResponse
     {
-        //
+        $productUpdate = Product::where('name', $request->name)->where('id', '!=', $id)->get();
+
+        if ($productUpdate->count() > 0){
+            return redirect()->back()->with('error', 'Produto já cadastrado');
+        }
+
+        $productUpdate = Product::where('id', $id)->first();
+        $productUpdate->name = $request->name;
+        $productUpdate->save();
+
+        return redirect()->route('product.index');
+
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return Response
+     * @param $id
+     * @return RedirectResponse
      */
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
-        //
+        Product::findOrFail($id)->delete();
+
+        return redirect()->route('product.index');
     }
 }
