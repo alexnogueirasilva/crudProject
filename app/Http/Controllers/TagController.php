@@ -33,7 +33,7 @@ class TagController extends Controller
 
     /**
      * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store(Request $request): RedirectResponse
     {
@@ -55,14 +55,14 @@ class TagController extends Controller
      * @param  int  $id
      * @return void
      */
-    public function show($id)
+    public function show($id): void
     {
         //
     }
 
     /**
      * @param $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return Application|Factory|View
      */
     public function edit($id): View|Factory|Application
     {
@@ -74,21 +74,17 @@ class TagController extends Controller
     }
 
     /**
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @param $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): RedirectResponse
     {
-        $tagUpdate = Tag::where('name', $request->name)->get();
 
-        if ($tagUpdate === $request['name']){
-            return redirect()->back()->with('error', 'A tag não foi modificada');
-        }
+        $tagUpdates = Tag::where('name', $request->name);
 
-
-        if ($tagUpdate->count() > 0 ){
-            return redirect()->back()->with('error', 'A tag já existe');
+        if ($tagUpdates->count() > 0 ){
+            return redirect()->back()->with('error', 'A tag já existe, não foi modificado');
         }
 
        $tagUpdate = Tag::where('id', $id)->first();
