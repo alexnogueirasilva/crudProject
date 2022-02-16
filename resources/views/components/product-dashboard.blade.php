@@ -45,7 +45,8 @@
                             <td class="px-6 py-4 whitespace-nowrap">
                                 @foreach($product->tags as $tag)
                                     <span
-                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"> {{ $tag->name }} </span>
+                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"><a
+                                            href="{{ route('tag.edit', ['tag' => $tag->id]) }}">{{ $tag->name }}</a></span>
                                 @endforeach
                             </td>
 
