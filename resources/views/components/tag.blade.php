@@ -67,8 +67,9 @@
                                                 <td class="px-6 py-4 whitespace-nowrap">
                                                     <div class="text-sm text-gray-900"> Proutos relacionandos</div>
                                                     @foreach($tag->product as $product)
-                                                        <div class="text-sm  text-gray-900"><a href="{{ route('product.edit', ['product' => $product->id]) }}"><span
-                                                                    class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{{ $product->name }}</span></a></div>
+                                                        <span
+                                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"><a
+                                                                href="{{ route('tag.edit', ['tag' => $product->id]) }}">{{ $product->name }}</a></span>
                                                     @endforeach
                                                     <div class="text-sm py-4 text-gray-900">
                                                         Total: {{ $tag->product->count()}}</div>
