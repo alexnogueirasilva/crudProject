@@ -23,7 +23,7 @@ class ProductController extends Controller
      */
     public function dashboard()
     {
-        $products = Product::products();
+        $products = Product::with('tags')->get();
 
         return view('dashboard', [
             'products' => $products

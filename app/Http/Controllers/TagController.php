@@ -17,12 +17,7 @@ class TagController extends Controller
      */
     public function index(): View|Factory|Application
     {
-        $tags  = DB::table('tags')
-            ->join('products_tags', 'tags.id', '=', 'products_tags.tag_id')
-            ->join('products', 'products_tags.product_id', '=', 'products.id')
-            ->select('tags.*', 'products.name AS product', DB::raw('COALESCE(count(products.name) 0) as qtn_product'))
-            ->groupBy('tags.name')
-            ->get();
+        $tags = Tag::with('product')->get();
 
         return view('components.tag', [
             'tags' => $tags
