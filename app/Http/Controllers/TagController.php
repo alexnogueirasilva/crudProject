@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TagController extends Controller
 {
@@ -16,7 +17,12 @@ class TagController extends Controller
      */
     public function index(): View|Factory|Application
     {
-        $tags = Tag::all();
+        $tags  = DB::table('tags')
+            ->join('products_tags', 'tags.id', '=', 'products_tags.tag_id')
+            ->join('products', 'products_tags.product_id', '=', 'products.id')
+            ->select('tags.*', 'products.name AS product', DB::raw('COALESCE(count(products.name) 0) as qtn_product'))
+            ->groupBy('tags.name')
+            ->get();
 
         return view('components.tag', [
             'tags' => $tags
@@ -39,7 +45,7 @@ class TagController extends Controller
     {
         $tagCreate = Tag::where('name', $request->name)->get();
 
-        if ($tagCreate->count() > 0){
+        if ($tagCreate->count() > 0) {
             return redirect()->back()->with('error', 'Whoops já existe essa tag');
         }
 
@@ -82,15 +88,15 @@ class TagController extends Controller
         $tagUpdates = Tag::where('name', $request->name)->where('id', '!=', $id)->get();
 
 
-        if ($tagUpdates->count() > 0 ){
+        if ($tagUpdates->count() > 0) {
             return redirect()->back()->with('error', 'A tag já existe');
         }
 
-       $tagUpdates = Tag::where('id', $id)->first();
-       $tagUpdates->name = $request->name;
-       $tagUpdates->save();
+        $tagUpdates = Tag::where('id', $id)->first();
+        $tagUpdates->name = $request->name;
+        $tagUpdates->save();
 
-       return redirect()->route('tag.index');
+        return redirect()->route('tag.index');
     }
 
     /**
@@ -100,10 +106,10 @@ class TagController extends Controller
     public function destroy($id): RedirectResponse
     {
 
-       $tagDelete = Tag::findOrFail($id);
-       $tagDelete->product()->detach();
-       $tagDelete->delete();
+        $tagDelete = Tag::findOrFail($id);
+        $tagDelete->product()->detach();
+        $tagDelete->delete();
 
-       return redirect()->route('tag.index')->with('info', "A tag {$tagDelete->name} foi deletada");
+        return redirect()->route('tag.index')->with('info', "A tag {$tagDelete->name} foi deletada");
     }
 }

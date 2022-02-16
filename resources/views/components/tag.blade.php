@@ -65,8 +65,9 @@
                                                 </div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
-                                                <div class="text-sm text-gray-900">Regional Paradigm Technician</div>
-                                                <div class="text-sm text-gray-500">Optimization</div>
+                                                <div class="text-sm text-gray-900">Essa tag possui</div>
+
+                                                <div class="text-sm text-gray-500">{{ $tag->qtn_product }} produtos atrelado a ela</div>
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <span

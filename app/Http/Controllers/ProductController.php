@@ -92,12 +92,6 @@ class ProductController extends Controller
 
         $createProduct = Product::create($request->all());
         $createProduct->save();
-        $product_id = $createProduct->id;
-
-        $tags = new ProductsTags();
-        $tags->product_id = $product_id;
-        $tags->tag_id = $request['tom-select'];
-        $tags->save();
 
          return redirect()->route('product.index');
     }
