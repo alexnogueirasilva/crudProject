@@ -61,6 +61,14 @@ class ProductController extends Controller
      */
     public function createRelationship(Request $request): RedirectResponse
     {
+        $relationships = Product::products();
+
+        foreach ($relationships as $relationship) {
+            if ($relationship->produc_id == $request->id && $relationship->tag_id == $request->tag_id) {
+                return redirect()->back()->with('error', 'Whoops já exite esse produto');
+            }
+        }
+
         $createProduct = ProductsTags::create($request->all());
         $createProduct->save();
 
@@ -72,7 +80,8 @@ class ProductController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function create()
+    public
+    function create()
     {
 
         return view('components.product-create');
@@ -82,40 +91,43 @@ class ProductController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function store(Request $request): RedirectResponse
+    public
+    function store(Request $request): RedirectResponse
     {
         $product = Product::where('name', $request->name)->get();
 
-        if ($product->count() > 0){
+        if ($product->count() > 0) {
             return redirect()->back()->with('error', 'Whoops já exite esse produto');
         }
 
         $createProduct = Product::create($request->all());
         $createProduct->save();
 
-         return redirect()->route('product.index');
+        return redirect()->route('product.index');
     }
 
     /**
      * @param $id
      * @return Application|Factory|View
      */
-    public function show($id)
+    public
+    function show($id)
     {
-       $product = Product::find($id);
+        $product = Product::find($id);
 
-       return view('components.product-edit',);
+        return view('components.product-edit',);
     }
 
     /**
      * @param $id
      * @return Application|Factory|View
      */
-    public function edit($id)
+    public
+    function edit($id)
     {
         $productEdit = Product::find($id);
 
-        return view('components.product-edit',[
+        return view('components.product-edit', [
             'productEdit' => $productEdit
         ]);
     }
@@ -125,11 +137,12 @@ class ProductController extends Controller
      * @param $id
      * @return RedirectResponse
      */
-    public function update(Request $request, $id): RedirectResponse
+    public
+    function update(Request $request, $id): RedirectResponse
     {
         $productUpdate = Product::where('name', $request->name)->where('id', '!=', $id)->get();
 
-        if ($productUpdate->count() > 0){
+        if ($productUpdate->count() > 0) {
             return redirect()->back()->with('error', 'Produto já cadastrado');
         }
 
@@ -145,12 +158,12 @@ class ProductController extends Controller
      * @param $id
      * @return RedirectResponse
      */
-    public function destroy($id): RedirectResponse
+    public
+    function destroy($id): RedirectResponse
     {
-       $productDelete = Product::findOrFail($id);
-       $productDelete->tags()->detach();
-       $productDelete->delete();
-
+        $productDelete = Product::findOrFail($id);
+        $productDelete->tags()->detach();
+        $productDelete->delete();
 
 
         return redirect()->route('product.index')->with('info', "Produto {$productDelete->name} excluído com sucesso !");

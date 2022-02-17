@@ -22,7 +22,7 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('dashboard', [ProductController::class, 'dashboard'])->name('dashboard');
     Route::get('product/relationship', [ProductController::class, 'relationship'])->name('product.relationship');
-    Route::post('product/relationship/create', [ProductController::class, 'createRelationship'])->name('product.createRelationship');
+    Route::any('product/relationship/create', [ProductController::class, 'createRelationship'])->name('product.createRelationship');
     Route::resource('product', ProductController::class);
     Route::resource('tag', TagController::class);
 });
