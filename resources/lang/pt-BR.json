@@ -107,5 +107,7 @@
     "Promobit products CRUD": "CRUD de produtos Promobit",
     "Challenge": "Desafio",
     "Back": "Voltar",
-    "Close": "Fechar"
+    "Close": "Fechar",
+    "No Product Registered...": "Nenhum produto cadastrado",
+    "No relationship find produto/tag": "Nenhum dado encontrado"
 }

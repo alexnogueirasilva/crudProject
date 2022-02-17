@@ -25,6 +25,7 @@
                     </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
+                    @if($products->count() > 0 )
                     @foreach($products as $product)
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap">
@@ -64,9 +65,13 @@
                                             class="text-red-600 hover:text-red-900">{{ __('Delete') }}</button>
                                 </form>
                             </td>
-
                         </tr>
                     @endforeach
+                    @else
+                        <td class="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
+                            {{ __('No relationship find produto/tag') }}
+                        </td>
+                    @endif
                     </tbody>
                 </table>
             </div>
