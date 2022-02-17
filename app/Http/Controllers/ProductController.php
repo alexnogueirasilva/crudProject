@@ -66,7 +66,7 @@ class ProductController extends Controller
 
         foreach ($relationships as $relationship) {
             if ($relationship->product_id == $request->product_id && $relationship->tag_id == $request->tag_id) {
-                return redirect()->back()->with('error', 'Whoops já exite esse produto');
+                return redirect()->back()->with('error', 'Whoops já exite esse produto relacionando a essa tag');
             }
         }
 
