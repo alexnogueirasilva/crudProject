@@ -3,7 +3,7 @@
 
 Criação de CRUD de produtos, tags e extração de relatório de relevância de produtos.
 
-# Requisito
+# Requisitos
 
 - [PHP 8+](https://www.php.net/downloads)
 - [Composer](https://getcomposer.org/download/)
