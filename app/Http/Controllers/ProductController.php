@@ -61,10 +61,11 @@ class ProductController extends Controller
      */
     public function createRelationship(Request $request): RedirectResponse
     {
+
         $relationships = Product::products();
 
         foreach ($relationships as $relationship) {
-            if ($relationship->produc_id == $request->id && $relationship->tag_id == $request->tag_id) {
+            if ($relationship->product_id == $request->product_id && $relationship->tag_id == $request->tag_id) {
                 return redirect()->back()->with('error', 'Whoops já exite esse produto');
             }
         }
