@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @method static products()
  * @method static paginate(int $int)
+ * @method static where(string $string, mixed $name)
+ * @method static create(array $all)
+ * @method static find($id)
  */
 class Product extends Model
 {

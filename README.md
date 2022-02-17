@@ -9,6 +9,25 @@ Criação de CRUD de produtos, tags e extração de relatório de relevância de
 - [Composer](https://getcomposer.org/download/)
 - [Node v16.4.*](https://nodejs.org/en/)
 
+# Instalação 
+
+```bash
+composer install
+npm i && npm run dev
+```
+
+Acessar a pasta do projeto
+
+```bash
+cp .env.exemple .env
+php artisan key:generate
+php artisan migrate
+
+php arisan serve
+```
+
+# Relatório Tag sumarizador de product
+
 ```SQL
 select t.name,
        count(`products`.id) as Quantity_product
