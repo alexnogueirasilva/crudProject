@@ -19,6 +19,7 @@ class TagController extends Controller
     {
         $tags = Tag::with('product')->get();
 
+
         return view('components.tag', [
             'tags' => $tags
         ]);
