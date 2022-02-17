@@ -1,3 +1,14 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+
+@media print {
+    .ms-editor-squiggles-container {
+        display:none !important;
+    }
+}
+.ms-editor-squiggles-container {
+    all: initial;
+}
+
