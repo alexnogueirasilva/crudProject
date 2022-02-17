@@ -70,7 +70,7 @@
                                                     @foreach($tag->product as $product)
                                                         <span
                                                             class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"><a
-                                                                href="{{ route('tag.edit', ['tag' => $product->id]) }}">{{ $product->name }}</a></span>
+                                                                href="{{ route('product.edit', ['product' => $product->id]) }}">{{ $product->name }}</a></span>
                                                     @endforeach
                                                     <div class="text-sm py-4 text-gray-900">
                                                         Total: {{ $tag->product->count()}}</div>
